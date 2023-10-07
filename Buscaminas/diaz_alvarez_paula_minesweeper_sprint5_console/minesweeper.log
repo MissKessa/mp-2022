@@ -1,0 +1,53 @@
+[2023-05-09T11:57:53.267228300]: java.io.NotSerializableException: uo.mp.minesweeper.ranking.GameRankingEntry
+[2023-05-09T12:39:39.980834100]: INVALID LINE [1] : The line hasn't have length 5, it has length:6
+[2023-05-10T10:40:14.276590400]: Recoverable error: The operation must be 's', 'f' or 'u'
+[2023-05-10T10:40:18.798142900]: Recoverable error: The coordinate must be in [0,8]
+[2023-05-10T13:05:49.096473800]: The logger cannot be null
+[10/05/23 - 14:04:39]: Recoverable error: The level must be 'e', 'm' or 'h'
+[10/05/23 - 14:04:54]: Recoverable error: The operation must be 's', 'f' or 'u'
+[10/05/23 - 15:19:15]: Recoverable error: The level must be 'e', 'm' or 'h'
+[10/05/23 - 15:19:22]: Recoverable error: The operation must be 's', 'f' or 'u'
+[10/05/23 - 15:19:25]: Recoverable error: The coordinate must be in [0,8]
+[10/05/23 - 15:19:30]: Recoverable error: The coordinate must be in [0,8]
+[10/05/23 - 15:20:12]: Recoverable error: The coordinate must be in [0,8]
+[10/05/23 - 15:53:36]: Recoverable error: The level must be 'e', 'm' or 'h'
+[10/05/23 - 15:53:40]: Recoverable error: The level must be 'e', 'm' or 'h'
+[10/05/23 - 15:54:00]: Recoverable error: The operation must be s, f or u
+[10/05/23 - 15:54:02]: Recoverable error: The operation must be s, f or u
+[10/05/23 - 15:54:14]: Recoverable error: The coordinate must be in [0,8]
+[10/05/23 - 15:54:17]: Recoverable error: The coordinate must be in [0,8]
+[10/05/23 - 15:55:49]: Recoverable error: The answer must be 'y' or 'n'
+[10/05/23 - 19:09:34]: INVALID LINE [8] : The line hasn't have length 6, it has length:7
+[10/05/23 - 21:38:10]: Recoverable error: The option must be one of the available
+[10/05/23 - 21:38:29]: Recoverable error: The option must be one of the available
+[10/05/23 - 21:39:54]: Recoverable error: The level must be 'e', 'm' or 'h'
+[10/05/23 - 21:43:30]: Recoverable error: The coordinate must be in [0,8]
+[10/05/23 - 21:44:40]: Recoverable error: The operation must be s, f or u
+[10/05/23 - 21:44:42]: Recoverable error: The coordinate must be in [0,15]
+[10/05/23 - 21:44:46]: Recoverable error: The coordinate must be in [0,15]
+[10/05/23 - 21:44:54]: Recoverable error: The coordinate must be in [0,15]
+[10/05/23 - 21:44:59]: Recoverable error: The coordinate must be in [0,15]
+[10/05/23 - 21:53:10]: The maximum x-coordinate (column) of the board must be in [0,29]
+[10/05/23 - 21:56:40]: The maximum x-coordinate (column) of the board must be in [0,29]
+[10/05/23 - 21:57:08]: The maximum AA x-coordinate (column) of the board must be in [0,29]
+[10/05/23 - 22:02:18]: Recoverable error: The coordinate must be a number
+[10/05/23 - 22:03:00]: Recoverable error: The coordinate must be in [0,15]
+[10/05/23 - 22:03:05]: Recoverable error: The coordinate must be in [0,15]
+[10/05/23 - 22:03:09]: Recoverable error: The coordinate must be in [0,15]
+[10/05/23 - 22:03:17]: Recoverable error: The coordinate must be in [0,15]
+[10/05/23 - 22:29:31]: Recoverable error: The coordinate must be a number
+[10/05/23 - 22:29:35]: Recoverable error: The operation must be s, f or u
+[10/05/23 - 22:29:35]: Recoverable error: The operation must be s, f or u
+[11/05/23 - 22:25:23]: Recoverable error: The coordinate must be a number
+[11/05/23 - 22:26:39]: Recoverable error: The operation must be s, f or u
+[11/05/23 - 22:26:42]: Recoverable error: The coordinate must be in [0,8]
+[11/05/23 - 22:26:46]: Recoverable error: The coordinate must be in [0,8]
+[11/05/23 - 22:26:51]: Recoverable error: The coordinate must be in [0,8]
+[11/05/23 - 22:26:55]: Recoverable error: The coordinate must be in [0,8]
+[11/05/23 - 22:27:18]: Recoverable error: The coordinate must be in [0,8]
+[11/05/23 - 22:29:35]: Recoverable error: The answer must be 'y' or 'n'
+[11/05/23 - 22:29:39]: Recoverable error: The option must be one of the available
+[11/05/23 - 22:29:40]: Recoverable error: The option must be one of the available
+[11/05/23 - 22:30:09]: Recoverable error: The option must be a number
+[11/05/23 - 22:30:14]: Recoverable error: The option must be a number
+[11/05/23 - 22:31:55]: Recoverable error: The coordinate must be a number
