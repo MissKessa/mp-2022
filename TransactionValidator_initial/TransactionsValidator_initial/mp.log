@@ -1,0 +1,8 @@
+Sun May 07 17:50:26 CEST 2023 java.lang.ArrayIndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at uo.mp.transaction.validator.parser.TransactionParser.divideLine(TransactionParser.java:37)
+	at uo.mp.transaction.validator.parser.TransactionParser.parse(TransactionParser.java:23)
+	at uo.mp.transaction.validator.file.TransactionLoader.load(TransactionLoader.java:23)
+	at uo.mp.transaction.TransactionProcessor.process(TransactionProcessor.java:18)
+	at uo.mp.Main.process(Main.java:44)
+	at uo.mp.Main.run(Main.java:23)
+	at uo.mp.Main.main(Main.java:18)

@@ -1,0 +1,124 @@
+Qué es Unicode
+
+Unicode es un estándar para la codificación de caracteres. Una codificación de caracteres define una tabla que representa caracteres como números. A cada caracter se le asocia un número. En Unicode a ese número se le llama code point.
+
+El problema de las representaciones de caracteres existentes antes de Unicode es que sólo permitían representar un conjunto de caracteres de un idioma o un reducido conjunto de idiomas. Por ejemplo la codificación de caracteres ASCII permite mapear 128 caracteres, suficiente para representar las letras latinas minúsculas y mayúsculas, números, signos de puntuación y caracteres de control. Estos son los caracteres imprimibles de la codificación de caracteres ASCII.
+
+! " # $ % & ' ( ) * +, -. / 0 1 2 3 4 5 6 7 8 9 :; < = > ?
+
+@ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z [ \ ] ^ _
+
+` a b c d e f g h i j k l m n o p q r s t u v w x y z { | } ~ 
+
+Con ASCII no se pueden representar algunos caracteres de lenguas europeas, ni mucho menos otras lenguas de origen no latino (griego, chino, japonés, árabe,...). Para escribir en otras lenguas es necesario utilizar otras codificaciones de caracteres. Pero con otras codificaciones tenemos el mismo problema. Por ejemplo si usamos una codificación sólo para chino no podremos escribir en griego. En definitiva las codificaciones de caracteres distintas a Unicode permiten codificar textos de diferentes idiomas, pero no permiten hacer cualquier combinación de idiomas en el mismo texto. Unicode es una codificación diseñada para poder utilizar cualquier lengua o combinación de lenguas en un texto.
+
+Unicode permite representar los caracteres de las lenguas más habladas en el mundo, incluso otros símbolos como caracteres matemáticos, signos de puntuación, etc. además de caractereres de control como caracteres para establecer el orden de estricutura (de izquierda a derecha o de derecha a izquierda). Es decir, Unicode permite escribir con la misma codificación de caracteres en cualquiera de las múltiples lenguas soportadas.
+
+El mapa de caracteres Unicode se va ampliando y revisando con el tiempo. Actualmente la última versión de Unicode es la 5.1 y contiene aproximadamente 100.000 caracteres definidos. No obstante Unicode está diseñado para codificar más de 1 millón de caracteres. Es decir, hay muchos huecos en la tabla Unicode que están por rellenar. Ese es el motivo de que con el tiempo aparezcan nuevas versiones del estándar. Los huecos de la tabla se van rellenando con el tiempo.
+Codificación de caracteres (charset) y encodings
+
+Unicode es una codificación de caracteres (charset). Y una codificación de caracteres, recordemos, asocia un número a cada caracter o símbolo. Ese número en Unicode se llama code point. Pero esta información no es suficiente para almacenar o transferir texto codificado en Unicode. Es preciso también definir cómo ese número (code point) es representado en una secuencia binaria.
+
+Nota: al hablar de Unicode un code point se suele representar como "U+" concatenado con cuatro cifras hexadecimales. Pero si el code point es mayor que U+FFFF, se representa con el número de caracteres hexadecimales mínimo necesario para representarlo. Por ejemplo los números griegos antigos empiezan a codificarse a partir de U+10140. Esto es simplemente una notación para referirse a valores de code point. Para referirme a valores de bytes utilizaré la representación "0x" concatenada con dos cifras hexadecimales.
+
+Bien, pero seguimos sin saber cómo guardar o transferir información Unicode porque no sabemos cómo transformar un code point a una secuencia binaria. Para eso necesitamos definir encodings. Los encodings para Unicode más populares son: UTF-8, UTF-16 y UTF-32.
+
+UTF-32 representa los code points utilizando 4 bytes. De este modo puede representar los caracteres U+0000 a U+FFFFFFFF. Utilizando UTF-32 la letra "a" (U+0061) queda representada con los bytes 0x00 0x00 0x00 0x61. El problema de utilizar UTF-32 es que si la mayoría de los caracteres que vamos a usar tienen code points bajos enseguida vemos que vamos a tener muchos bytes a cero. Estaremos utilizando 32 bits por cada caracter cuando aparentemente podríamos estar usando menos espacio.
+
+UTF-8 representa los code points utilizando sólo 1 byte. Así pues utilizando UTF-8 la letra "a" (U+0061) queda representada como 0x61. ¡Mucho mejor! Pero... ¿cómo podemos representar todos los caracteres Unicode en 1 byte? La respuesta es sencilla: no podemos. El truco es que no he dicho toda la verdad. UTF-8 no siempre usa 1 byte para representar un code point. UTF-8 es una codificación de longitud variable. UTF-8 utiliza entre 1 y 4 bytes para codificar los code points. Es decir, dependiendo del code point este se representará usando entre 1 y 4 bytes.
+
+    Si el code point tiene un valor entre U+0000 y U+007F se utiliza 1 byte. Todos los code points en este rango al ser pasados a binario tienen un cero a la izquierda (7F en hexadecimal es 127 en decimal, 01111111 en binario). De modo que al empezar a leer Unicode si el primer bit es cero, entonces el caracter ocupa 1 byte.
+    Si el code point tiene un valor entre U+0080 y U+07FF se utilizan 2 bytes. El layout binario será 110xxxxx 10xxxxxx
+    Si el code point tiene un valor entre U+0800 y U+FFFF se utilizan 3 bytes. El layout binario tiene este aspecto: 1110xxxx 10xxxxxx 10xxxxxx
+    Si el code point tiene un valor entre U+10000 y U+10FFFF se utilizan 4 bytes.
+
+Por lo tanto para textos en lenguas occidentales, donde la mayor parte de los caracteres están entre U+0000 y U+007F, UTF-8 es la mejor elección para codificar Unicode puesto que el documento ocupará poco espacio. Además los code points entre U+0000 y U+007F se han hecho coincidir con el estándar ASCII. De este modo un documento guardado usando UTF-8 que utilice sólo ese rango de caracteres es totalmente compatible con ASCII codificado en 8 bits. Estas características han hecho de UTF-8 la codificación más popular de Unicode.
+
+Otra codificación bastante popular es UTF-16 que también es una codificación de longitud variable. En Wikipedia se puede ver una tabla resumen comparando los layouts de UTF-8 y UTF-16.
+
+Como ejemplo ilustrativo vamos a comparar cómo se guardan los caracteres "a" y "ñ" en UTF-8 y UTF-16
+
+    "a" se almacena en UTF-8 como 0x61. En UTF-16 se almacena como 0x00 0x61
+    "ñ" se almacena en UTF-8 como 0xc3 0xb1. En UTF-16 se almacena como 0x00 0xf1
+
+Para más información la página de Wikipedia sobre codificaciones de caracteres contiene al final una tabla comparativa de los caracteres españoles representados en ISO-8859-1, UTF-8 y UTF-16. Y la página de Wikipedia sobre Unicode contiene también información sobre otros encodings para Unicode como UTF-7, UTF-EBCDIC,...
+Big Endian, Little Endian y BOM (Bit Order Mask)
+
+Recapitulemos. Hasta ahora con el mapa de caracteres Unicode obtenemos el code point para un caracter. Con el code point y eligiendo un encoding (UTF-8, UTF-16,...) obtenemos la secuencia de bytes que lo representarán. ¿Lo tenemos todo para transferir o almacenar Unicode? ¡Todavía no! Existe un problema y es que según la arquitectura de un ordenador los mismos bytes se guardan en un orden u otro. Existen arquitecturas big endian y arquitecturas little endian. Tanto UTF-16 y UTF-32 permiten guardar los bytes tanto en formato big endian como little endian, pero habrá que definirlo de alguna forma en el documento. También sería conveniente tener algún mecanismo para saber qué tipo de encoding está usando un documento. Para resolver estos dos problemas existe el BOM (Bit Order Mask).
+
+El BOM es una secuencia de 2 o 4 bytes al inicio de un documento Unicode que indica su encoding y si se ha utilizado big o little endian.
+
+    FE FF : UTF-16 big endian
+    FF FE : UTF-16 little endian
+    00 00 FE FF : UTF-32 big endian
+    FF FE 00 00 : UTF-32 little endian
+    EF BB BF : UTF-8 little endian
+
+Para UTF-8 no es obligatorio usar el BOM. Además es desaconsejable su uso porque puede que algunos sistemas no lo soporten. Por ejempo Java no interpreta correctamente el BOM en UTF-8.
+Caracteres, glifos y grafemas
+
+Bien, ya conocemos los principios necesarios para saber leer, transportar y almacenar Unicode. Sin embargo queda algo importante: mostrar los caracteres en pantalla o en algún otro medio visual. Para eso usaremos una tipografía. Una tipografía asocia una forma a un caracter. De modo que el caracter "a" tendrá diferentes formas según la tipografía que estemos utilizando. A esta forma se le denomina glifo.
+
+Pero no todo es tan sencillo. Unicode permite representar algunos caracteres de dos formas. Por ejemplo "á" puede ser representado como U+00E3 ("Letra latina 'a' con tilde") o como una forma compuesta de U+0061 ("Letra latina 'a'") y U+0303 ("tilde"). Estas formas compuestas se denominan grafemas. Esto significa que un caracter puede ser representado por más de un code point.
+
+Los encodings de longitud variable y los caracteres compuestos de más de un code point complican tareas sencillas como calcular los caracteres que hay en un documento. No podemos contar bytes, ni code points para calcular los caracteres. El proceso es más complejo como hemos podido ver. Afortunadamente manejar Unicode suele ser transparente para la mayor parte de los programadores porque otros programadores ya se han encargado de las tareas de bajo nivel como estas. Nosotros normalmente sólo tendremos que tener en cuenta algunas cosas, como las que explico a continuación:
+Utilizar UTF-8 en tus aplicaciones
+
+Para terminar voy a dar unos pequeños consejos para utilizar UTF-8 en tus aplicaciones. He elegido UTF-8 porque es el encoding Unicode más recomendable, pero los consejos son aplicables a cualquier codificación de caracteres y encoding.
+
+Define la codificación de caracteres en todos los ficheros si el formato lo soporta
+
+En XML inicia el documento con
+
+xml version="1.0" encoding="UTF-8" ?>
+
+En HTML no te olvides de poner
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+En el código fuente de tu lenguaje de programación. Por ejemplo en Python (PEP 0263)
+
+#!/usr/bin/python
+
+# -*- coding: utf-8 -*-
+
+Configura tu entorno de desarrollo y haz que todos tus compañeros de equipo configuren adecuadamente el suyo. Es común que el entorno de desarrollo o editor que uses coja la codificación por defecto del sistema y eso producirá incompatibilidades si cambias de sistema. Por ejemplo Windows y MacOSX tiene codificaciones propias que darán problemas al cambiar de sistema operativo.
+
+También ten en cuenta que algunos formatos de fichero no soportan ser creados en cualquier codificación. Por ejemplo en Java los archivos de propiedades deben ser escritos en ISO-8859-1, a no ser que uses el formato XML.
+
+En aplicaciones web...
+
+En la cabecera HTTP Content-Type define la codificación de caracteres además del tipo MIME.
+
+Content-Type: text/html;charset=UTF-8
+
+En los documentos HTML utiliza también la etiqueta correspondiente que he señalado anteriormente. Si lo defines en ambos lados, cabecera HTTP y documento HTML, nunca tendrás problemas.
+
+En los formularios HTML define el accept-encoding
+
+<form accept-charset="utf-8" ...>
+
+Sino defines el accept-charset es posible que el navegador te envíe los datos en ISO-8859-1 aunque el formulario se encuentre en una página codificada con UTF-8.
+
+En tu base de datos
+
+Asegúrate de que tienes configurada la base de datos para almacenar el texto en UTF-8. No te servirá de nada que el resto de la aplicación esté configurado para usar UTF-8 si tu base de datos no lo soporta.
+
+En tu lenguaje de programación y en tu código
+
+Muchos de los lenguajes de programación modernos soportan nativamente y por defecto Unicode. Sin embargo debes asegurarte. Y no sólo eso, sino que tienes que tener cuidado en la forma en que programas. Por ejemplo, ten en cuenta que no es lo mismo... (en Java)
+
+int size1 = "maño".length();
+
+int size2 = "maño".getBytes("UTF-8").length;
+
+No es lo mismo la longitud de caracteres que el número de bytes. En ocasiones puede ser igual, pero no siempre.
+
+Y ten siempre en cuenta una cosa. No existe el "text plain" como comúnmente se entiende. Todo texto informatizado tiene su codificación de caracteres. Tenlo siempre presente. Parte de tu trabajo será crear y gestionar texto codificado de diferentes formas. Prueba tu aplicación con caracteres que tengan code points mayores que los definidos en el estándar ASCII. La compatibilidad entre UTF-8, ASCII y las codificaciones de ASCII extendido ha probocado que muchas aplicaciones estén mal programadas aunque "aparentemente" y "normalmente" hagan bien su trabajo. Pero si a estas aplicaciones les pasas caracteres fuera de la tabla ASCII, dejan de procesar correctamente el texto. ¡Entonces es que en ningún momento lo procesaban bien! Solo que con el subconjunto compatible no había habido problemas hasta entonces.
+Enlaces de interés
+
+    The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!).
+    The Unicode Consortium.
+    Codificación de caracteres y Java.
+
+Para terminar una presentación de PHP6. Explica parte del estándar Unicode y de cómo va a poder usado en PHP6.
